@@ -1,23 +1,11 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styles from "./SearchBar.module.css";
 
-const SearchBar = ({ search, setQuery, query }) => {
-  const handlerSearch = useCallback(
-    (event) => {
-      search(event);
-      setQuery("");
-    },
-    [search, setQuery]
-  );
-
+const SearchBar = () => {
   return (
     <header className={styles.Searchbar}>
       <form className={styles.SearchForm}>
-        <button
-          type="submit"
-          className={styles.SearchFormButton}
-          onClick={handlerSearch}
-        >
+        <button type="submit" className={styles.SearchFormButton}>
           <span className={styles.SearchFormButtonLabel}>Search</span>
         </button>
 
@@ -27,8 +15,6 @@ const SearchBar = ({ search, setQuery, query }) => {
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
         />
       </form>
     </header>
