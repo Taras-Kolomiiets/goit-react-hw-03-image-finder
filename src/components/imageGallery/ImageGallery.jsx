@@ -1,8 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./imageGallery.module.css";
+import ImageGalleryItem from "../imageGalleryItem";
+import Modal from "../modal";
 
-const ImageGallery = () => {
-  return <ul className={classes.ImageGallery}></ul>;
+const ImageGallery = ({ images }) => {
+  const [modal, setModal] = useState(false);
+  const [imageIdx, setImageIdx] = useState(null);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  const showModal = (idx) => {
+    setImageIdx(idx);
+    setModal(true);
+  };
+
+  return (
+    <>
+      <ul className={classes.ImageGallery}>
+        {images.map((image, index) => {
+          return (
+            <ImageGalleryItem
+              image={image}
+              key={image.id}
+              showModal={() => {
+                showModal(index);
+              }}
+            />
+          );
+        })}
+      </ul>
+      {modal && (
+        <Modal onClose={toggleModal}>
+          <img
+            src={images[imageIdx].largeImageURL}
+            alt={images[imageIdx].tags}
+          />
+        </Modal>
+      )}
+    </>
+  );
 };
 
 export default ImageGallery;
