@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import classes from "./imageGallery.module.css";
 import ImageGalleryItem from "../imageGalleryItem";
 import Modal from "../modal";
@@ -41,6 +42,10 @@ const ImageGallery = ({ images }) => {
       )}
     </>
   );
+};
+
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ImageGallery;
